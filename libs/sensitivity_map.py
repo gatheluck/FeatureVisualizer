@@ -4,6 +4,7 @@ import random
 import sys
 
 import torch
+import torchvision
 import tqdm
 from torch.autograd.gradcheck import zero_gradients
 
@@ -189,7 +190,6 @@ def visualize_sensitivity_map(
 
 if __name__ == "__main__":
     import PIL
-    import torchvision
 
     num_classes = 100
     device = "cuda"
