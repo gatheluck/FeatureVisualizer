@@ -52,6 +52,26 @@ def unnormalize(x, mean, std, device: str):
     return x.mul(std[None, :, None, None]).add(mean[None, :, None, None])
 
 
+class VanillaGrad:
+    def __init__(self, model, num_classes: int, device: int):
+        self.num_classes = num_classes
+        self.device = device
+        self.model = model
+        self.model = self.model.to(self.device)
+        self.model.eval()
+
+    def __call__(self, x, t):
+        x, t = x.to(self.device), t.to(self.device)
+        x.requires_grad = True
+        logit = self.model(x if x.shape[1] == 3 else x.repeat(1, 3, 1, 1))
+        onehot_t = torch.nn.functional.one_hot(t, num_classes=self.num_classes).float()
+
+        logit.backward(gradient=onehot_t)
+        grad = x.grad.data
+
+        return grad.detach()
+
+
 class LossGrad:
     def __init__(
         self,
@@ -108,6 +128,7 @@ if __name__ == "__main__":
     x = normalize(x, mean, std, device)
 
     visualizers = list()
+    visualizers.append(VanillaGrad(model, num_classes, device))
     visualizers.append(LossGrad(model, num_classes, device))
 
     for visualizer in visualizers:
