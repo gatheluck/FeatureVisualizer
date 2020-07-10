@@ -6,6 +6,12 @@ the classes in `libs/sensitivity_map.py` are useful.
 
 By running `python sensitivity_map.py`, a sample image like following is saved under `logs/`.
 
+#### Vanilla Gradient (VanillaGrad)
+
+<img src="samples/result_VanillaGrad.png" height="100px">
+
+#### Loss Gradient (LossGrad)
+
 <img src="samples/result_LossGrad.png" height="100px">
 
 ## First layer visualization
