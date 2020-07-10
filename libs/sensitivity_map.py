@@ -146,7 +146,7 @@ def visualize_sensitivity_map(
         dataset = torch.utils.data.Subset(dataset, indices)
 
     loader = torch.utils.data.DataLoader(
-        dataset, batch_size=1, shuffle=True, pin_memory=True
+        dataset, batch_size=1, shuffle=False, pin_memory=True
     )
 
     model = model.to(device)
