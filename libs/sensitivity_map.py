@@ -53,7 +53,7 @@ def unnormalize(x, mean, std, device: str):
 
 
 class VanillaGrad:
-    def __init__(self, model, num_classes: int, device: int):
+    def __init__(self, model, num_classes: int, device: int, **kwargs):
         self.num_classes = num_classes
         self.device = device
         self.model = model
@@ -79,6 +79,7 @@ class LossGrad:
         num_classes: int,
         device: str,
         criterion=torch.nn.CrossEntropyLoss(),
+        **kwargs
     ):
         self.num_classes = num_classes
         self.device = device
