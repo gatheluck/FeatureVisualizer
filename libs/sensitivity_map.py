@@ -110,6 +110,7 @@ def visualize_sensitivity_map(
     dataset_builder,
     num_samples: int,
     num_classes: int,
+    ratio: float,
     method: str,
     log_dir: str,
     device: str,
@@ -133,6 +134,7 @@ def visualize_sensitivity_map(
         num_samples > 0 or num_samples == -1
     ), "[num_samples] option should be larger than 0 or -1."
     assert method in SUPPORTED_VISUALIZER, "specified [method] option is not supported."
+    assert ratio > 1.0, "[ratio] option should be larger than 1.0."
 
     dataset = dataset_builder(train=False, normalize=True)
     mean, std = dataset_builder.mean, dataset_builder.std
@@ -166,7 +168,7 @@ def visualize_sensitivity_map(
             x_cat = torch.cat(
                 [
                     unnormalize(x, mean, std, device),
-                    normalize_and_adjust(grad, 5.0, device),
+                    normalize_and_adjust(grad, ratio, device),
                 ]
             )
             torchvision.utils.save_image(
