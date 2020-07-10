@@ -150,9 +150,9 @@ def visualize_sensitivity_map(
     model.eval()
 
     visualizer = None
-    if visualizer == "vanilla":
+    if method == "vanilla":
         visualizer = VanillaGrad(model, num_classes=num_classes, device=device)
-    elif visualizer == "loss":
+    elif method == "loss":
         visualizer = LossGrad(model, num_classes=num_classes, device=device)
     else:
         raise NotImplementedError
