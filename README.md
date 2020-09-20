@@ -21,3 +21,8 @@ the function `save_first_layer_weight`  in `libs/first_layer.py`  is useful.
 By running `python first_layer.py`, a sample image like following is saved under `logs/`.
 
 <img src="samples/first_layer_weight.png" height="100px">
+
+## Frequency property of convolutional filter
+
+<img src="samples/first_layer_weight_freq_rgb.png" height="100px">
+<img src="samples/first_layer_weight_freq_gray.png" height="100px">
